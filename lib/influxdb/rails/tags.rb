@@ -20,7 +20,7 @@ module InfluxDB
       def expanded_tags
         config.tags_middleware.call(tags.merge(default_tags))
       end
-
+            
       def default_tags
         {
           server:   Socket.gethostname,
