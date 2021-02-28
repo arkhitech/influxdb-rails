@@ -12,6 +12,20 @@ The final release, no code changes.
 
 ## v1.0.1.beta3, released 2020-10-16
 
+## v2.0.0.beta2, release 2022-01-07
+
+- Support InfluxDB > 2.0
+  - Switched the client library to use [influxdb-client](https://github.com/influxdata/influxdb-client-ruby).
+    This is a breaking change as most of the configuration changed.
+
+## v2.0.0.beta1, release 2020-10-16
+
+- Support InfluxDB > 2.0
+  - Switched the client library to use [influxdb-ruby](https://github.com/influxdata/influxdb-client-ruby).
+    This is a breaking change as most of the configuration changed.
+
+## v1.0.1.beta3, release 2020-10-16
+
 - Drop `perform_start.active_job` subscriber, it's rather useless on dashboards.
 
 ## v1.0.1.beta2, released 2020-09-14
