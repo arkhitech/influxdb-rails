@@ -24,7 +24,7 @@ RSpec.describe "ActiveJob enqueue metrics", type: :request do
         state: "queued"
       ),
       fields: a_hash_including(
-        additional_value: :value,
+        additional_field: :value,
         request_id:       :request_id,
         value:            1
       )
