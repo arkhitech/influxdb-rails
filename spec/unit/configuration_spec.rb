@@ -24,7 +24,7 @@ RSpec.describe InfluxDB::Rails::Configuration do
 
     describe "#open_timeout" do
       it "defaults to 5 seconds" do
-        expect(subject.open_timeout).to eql(5.seconds)
+        expect(subject.open_timeout).to eql(5)
       end
 
       it "can be updated" do
@@ -37,7 +37,7 @@ RSpec.describe InfluxDB::Rails::Configuration do
 
     describe "#write_timeout" do
       it "defaults to 5 seconds" do
-        expect(subject.write_timeout).to eql(5.seconds)
+        expect(subject.write_timeout).to eql(5)
       end
 
       it "can be updated" do
@@ -50,7 +50,7 @@ RSpec.describe InfluxDB::Rails::Configuration do
 
     describe "#read_timeout" do
       it "defaults to 60 seconds" do
-        expect(subject.read_timeout).to eql(60.seconds)
+        expect(subject.read_timeout).to eql(60)
       end
 
       it "can be updated" do
