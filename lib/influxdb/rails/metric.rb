@@ -11,7 +11,7 @@ module InfluxDB
       end
 
       def write
-        write_api.write(data: data)
+        write_api.write(data: data, bucket: @configuration.client.bucket, org: @configuration.client.org)
       end
 
       private

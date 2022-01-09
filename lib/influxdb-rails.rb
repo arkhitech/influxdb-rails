@@ -47,8 +47,8 @@ module InfluxDB
           InfluxDB2::Client.new(
             cfg.url,
             cfg.token,
-            org:           cfg.org,
-            bucket:        cfg.bucket,
+            # org:           cfg.org,
+            # bucket:        cfg.bucket,
             precision:     cfg.precision,
             open_timeout:  cfg.open_timeout,
             write_timeout: cfg.write_timeout,

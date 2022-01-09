@@ -46,8 +46,8 @@ below.
 
 Reported ActiveSupport instrumentation hooks:
 
-- [start\_processing.action\_controller](https://guides.rubyonrails.org/active_support_instrumentation.html#start-processing-action-controller)
-- [process\_action.action\_controller](https://guides.rubyonrails.org/active_support_instrumentation.html#process-action-action-controller)
+- [start_processing.action_controller](https://guides.rubyonrails.org/active_support_instrumentation.html#start-processing-action-controller)
+- [process_action.action_controller](https://guides.rubyonrails.org/active_support_instrumentation.html#process-action-action-controller)
 
 Reported fields:
 
@@ -78,9 +78,9 @@ Reported tags:
 
 Reported ActiveSupport instrumentation hooks:
 
-- [render\_template.action\_view](https://guides.rubyonrails.org/active_support_instrumentation.html#render-template-action-view)
-- [render\_partial.action\_view](https://guides.rubyonrails.org/active_support_instrumentation.html#render-partial-action-view)
-- [render\_collection.action\_view](https://guides.rubyonrails.org/active_support_instrumentation.html#render-collection-action-view)
+- [render_template.action_view](https://guides.rubyonrails.org/active_support_instrumentation.html#render-template-action-view)
+- [render_partial.action_view](https://guides.rubyonrails.org/active_support_instrumentation.html#render-partial-action-view)
+- [render_collection.action_view](https://guides.rubyonrails.org/active_support_instrumentation.html#render-collection-action-view)
 
 Reported fields:
 
@@ -105,8 +105,8 @@ Reported tags:
 
 Reported ActiveSupport instrumentation hooks:
 
-- [sql.active\_record](https://guides.rubyonrails.org/active_support_instrumentation.html#sql-active-record)
-- [instantiation.active\_record](https://guides.rubyonrails.org/active_support_instrumentation.html#instantiation-active-record)
+- [sql.active_record](https://guides.rubyonrails.org/active_support_instrumentation.html#sql-active-record)
+- [instantiation.active_record](https://guides.rubyonrails.org/active_support_instrumentation.html#instantiation-active-record)
 
 Reported fields:
 
@@ -149,8 +149,8 @@ Reported instantiation tags:
 
 Reported ActiveSupport instrumentation hooks:
 
-- [enqueue.active\_job](https://guides.rubyonrails.org/active_support_instrumentation.html#enqueue-active-job)
-- [perform.active\_job](https://guides.rubyonrails.org/active_support_instrumentation.html#perform-active-job)
+- [enqueue.active_job](https://guides.rubyonrails.org/active_support_instrumentation.html#enqueue-active-job)
+- [perform.active_job](https://guides.rubyonrails.org/active_support_instrumentation.html#perform-active-job)
 
 Reported fields:
 
@@ -167,14 +167,14 @@ Reported tags:
   queue:      "queue_name"
 ```
 
-*Note*: Only the measurements with the hook `perform` report a duration in the value.
+_Note_: Only the measurements with the hook `perform` report a duration in the value.
 The enqueue hook is a counter and always reports a value of `1`.
 
 ### Action Mailer
 
 Reported ActiveSupport instrumentation hooks:
 
-- [deliver.action\_mailer](https://guides.rubyonrails.org/active_support_instrumentation.html#deliver-action-mailer)
+- [deliver.action_mailer](https://guides.rubyonrails.org/active_support_instrumentation.html#deliver-action-mailer)
 
 Reported fields:
 
@@ -189,7 +189,7 @@ Reported tags:
   mailer:             "SomeMailerClassName"
 ```
 
-*Note*: The hook is just a counter and always report a value of `1`.
+_Note_: The hook is just a counter and always report a value of `1`.
 
 ## Configuration
 
@@ -224,7 +224,7 @@ The `tags` argument is a Hash (mapping Symbol keys to String values). The
 actual keys and values depend on the series name (`tags[:series]`, see
 next section).
 
-If you want to add dynamically tags or fields *per request*, you can access
+If you want to add dynamically tags or fields _per request_, you can access
 `InfluxDB::Rails.current` to do so. For instance, you could add the current
 user as tag or redis query time to every data point:
 
@@ -240,6 +240,7 @@ end
 ```
 
 ### Block Instrumentation
+
 If you want to add custom instrumentation, you can wrap any code into a block instrumentation
 
 ```ruby
@@ -259,6 +260,7 @@ Reported tags:
 ```
 
 Reported fields:
+
 ```ruby
   value: 100 # execution time of the block in ms
 ```
@@ -287,6 +289,8 @@ arbitrary operations on your data:
 ```ruby
 InfluxDB::Rails.write_api.write(
   name: "events",
+  bucket: bucket,
+  org: org,
   tags:   { url: "/foo", user_id: current_user.id, location: InfluxDB::Rails.current.location },
   fields: { value: 0 }
 )
@@ -309,13 +313,14 @@ end
 ```
 
 ## Demo
+
 Want to see this in action? Check out our [sample dashboard](https://github.com/influxdata/influxdb-rails/tree/master/sample-dashboard).
 
 ## Frequently Asked Questions
 
 ### I'm seeing far less requests recorded in InfluxDB than my logs suggest.
 
-By default, this gem writes data points with *millisecond time precision*
+By default, this gem writes data points with _millisecond time precision_
 to the InfluxDB server. If you have more than 1000 requests/second (and/or
 multiple parallel requests), **only the last** data point (within the
 same tag set) is stored. See [InfluxDB server docs][duplicate-points] for
@@ -330,15 +335,14 @@ overwriting each other, but not eliminate it completely.
 
 [duplicate-points]: https://docs.influxdata.com/influxdb/v1.4/troubleshooting/frequently-asked-questions/#how-does-influxdb-handle-duplicate-points
 
-
 ### How does the measurement influence the response time?
 
 This gem subscribes to various `ActiveSupport::Notifications` hooks.
 (cf. [guide][arn-guide] · [docs][arn-docs] · [impl][arn-impl]). The
-controller notifications are run *after* a controller action has finished,
+controller notifications are run _after_ a controller action has finished,
 and should not impact the response time.
 
-Other notification hooks (rendering and SQL queries) run *inline* in the
+Other notification hooks (rendering and SQL queries) run _inline_ in the
 request processing. The amount of overhead introduced should be negligible,
 though. However reporting of SQL queries relies on Ruby string parsing which
 might cause performance issues on traffic intensive applications. Disable it in
@@ -394,14 +398,16 @@ The data points are simply discarded.
   - Add tests.
   - Add an entry in the `CHANGELOG.md` in the "unreleased" section on top.
 - Run the tests:
+
   - Either run them manually:
 
     ```console
     rake test:all
     ```
 
-  - or wait for [our CI](https://github.com/influxdata/influxdb-rails/actions) to pick up your changes, *after*
+  - or wait for [our CI](https://github.com/influxdata/influxdb-rails/actions) to pick up your changes, _after_
     you made a pull request.
+
 - Send a pull request.
 - If your changes are looking good, we'll merge them.
 
