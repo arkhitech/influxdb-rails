@@ -55,7 +55,8 @@ module InfluxDB
             read_timeout:  cfg.read_timeout,
             use_ssl:       cfg.use_ssl,
             logger:        logger,
-            async:         cfg.async
+            async:         cfg.async,
+            batch_abort_on_exception: cfg.batch_abort_on_exception
           )
         end
       end

@@ -45,7 +45,8 @@ module InfluxDB
         read_timeout:  60,
         precision:     ::InfluxDB2::WritePrecision::MILLISECOND,
         max_retries:   0,
-        async:         true
+        async:         true,
+        batch_abort_on_exception: true
       )
 
       def initialize
@@ -72,7 +73,8 @@ module InfluxDB
         ignored_environments: %w[test cucumber selenium].freeze,
         environment:          ::Rails.env,
         debug:                false,
-        logger:               ::Rails.logger
+        logger:               ::Rails.logger,
+        batch_abort_on_exception: true
       )
 
       # config option set after_initialize
